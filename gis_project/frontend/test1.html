@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<!-- Include leaflet CSS in the head section of document -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
+
+	<!-- Include leaflet script file in the head section of document -->
+	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+
+	<!-- Include css file -->
+	<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+
+	<!-- Include javascript file-->
+	<script type="text/javascript" src=code.js></script>
+
+</head>
+
+<body>
+
+	<!-- Put a div element with a certain id where you want your map to be -->
+	<div id="map"></div>
+
+	<!-- call script -->
+	<script type="text/javascript">
+
+		var map;
+
+		// initialize map
+		initmap();
+
+		// add mouse listener
+		map.on('click', onMapClick);
+		
+	</script>
+
+</body>
+
+</html>
