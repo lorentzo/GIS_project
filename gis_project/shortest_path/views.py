@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from .models import *
+from django.http import HttpResponse
 
-# Create your views here.
+
+def get_points(request):
+    return HttpResponse("What a wonderful world...")
