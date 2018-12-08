@@ -22,6 +22,13 @@
 	<!-- Put a div element with a certain id where you want your map to be -->
 	<div id="map"></div>
 
+    <div>
+	    <textarea id="inserted_points_box" name="inserted_points" placeholder="No inserted points."></textarea>
+    </div>
+
+    <button onclick="show_markers()">Display markers</button> 
+    <button onclick="hide_markers()">Hide markers</button>
+
 	<!-- call script -->
 	<script type="text/javascript">
 
@@ -30,8 +37,14 @@
 		// initialize map
 		initmap();
 
+		// points to be inserted
+		var inserted_points = [];
+		var inserted_markers = [];
+
 		// add mouse listener
 		map.on('click', onMapClick);
+
+
 		
 	</script>
 
