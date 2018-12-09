@@ -1,4 +1,36 @@
+#wrapper {
+    width: 1280px;
+    height: 720px;
+    border: 1px solid black;
+    overflow: auto;
+}
+
 #map { 
+	float:left;
 	width: 800px;
     height: 600px; 
+}
+
+#inserted_markers_buttons {
+    position:absolute;
+    top: 20px;
+    left:900px;
+}
+
+#selected_markers_buttons {
+    position:absolute;
+    top: 50px;
+    left:900px;
+}
+
+#database_markers_buttons {
+    position:absolute;
+    top: 80px;
+    left:900px;
+}
+
+#calculate_distance_button {
+    position:absolute;
+    top: 110px;
+    left:900px;
 }
