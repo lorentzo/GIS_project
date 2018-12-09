@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from .models import *
 from .forms import *
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
+# from .serializers import *
+from django.core import serializers
+import json
 
 
 def create_point(request):
-    # import pdb
-    # pdb.set_trace()
-
     if request.method == "POST":
         form = PointForm(request.POST)
 
@@ -27,6 +27,25 @@ def delete_point(request, id):
         point.delete()
 
         return redirect('points')
+
+    return HttpResponse(status=403)
+
+
+def list_points(request):
+    if request.method == 'GET':
+
+        # import pdb
+        # pdb.set_trace()
+
+        points = Point.objects.all()
+
+        points_json = serializers.serialize('json', points)
+        points_json_object = json.loads(points_json)
+        points_json_object.append({'success': True})
+
+        json_response = json.dumps(points_json_object)
+
+        return HttpResponse(json_response, content_type="application/json")
 
     return HttpResponse(status=403)
 

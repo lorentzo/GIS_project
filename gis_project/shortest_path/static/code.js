@@ -23,6 +23,7 @@ function initmap(){
         headers: { "X-CSRFToken": getCookie("csrftoken") }
     });
 
+    populateMap()
 }
 
 // right click
@@ -62,7 +63,30 @@ function onMapClick(event){
 
 	// diplay on map
 	map.addLayer(marker);
+}
 
+function populateMap() {
+    $.ajax({
+       type: 'GET',
+       url: 'http://localhost:8000/points/list',
+       success: function(data){
+            $.each(data, function(index, value) {
+                console.log(value)
+                if(value['fields']) {
+                    _lat = value['fields']['coordinate_x']
+                    _lng = value['fields']['coordinate_y']
+
+                    var latlng = {lat: _lat, lng: _lng};
+
+                    var marker = new L.marker(latlng);
+                    map.addLayer(marker);
+                }
+            });
+       },
+       error: function(error) {
+           console.log(error);
+       }
+   });
 }
 
 function show_markers(){
