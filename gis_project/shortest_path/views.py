@@ -6,6 +6,9 @@ from django.shortcuts import redirect
 
 
 def create_point(request):
+    # import pdb
+    # pdb.set_trace()
+
     if request.method == "POST":
         form = PointForm(request.POST)
 
