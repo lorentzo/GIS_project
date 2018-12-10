@@ -35,11 +35,6 @@
 		    <textarea rows="4" cols="97" id="selected_points_box" placeholder=" No selected points."></textarea>
 	    </div>
 
-	    <div id="inserted_markers_buttons">
-		    <button onclick="show_inserted_markers()">Display inserted markers</button>
-		    <button onclick="hide_inserted_markers()">Hide inserted markers</button>
-		</div>
-
 		<div id="selected_markers_buttons">
 		    <button onclick="show_selected_markers()">Show selected markers</button>
 		    <button onclick="hide_selected_markers()">Hide selected markers</button>
@@ -66,9 +61,6 @@
 
 		// points from database
 		var database_markers = [];
-
-		// points to be inserted
-		var inserted_markers = [];
 
 		// selected points
 		var selected_markers = [];

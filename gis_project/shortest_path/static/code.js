@@ -111,7 +111,7 @@ function onMapClick(event){
    });
 
    // remember marker in list
-	inserted_markers.push(marker);
+	database_markers.push(marker);
 	
 	// set content
 	marker.bindPopup("Position " + event.latlng.toString());
@@ -145,20 +145,6 @@ function populateMap() {
            console.log(error);
        }
    });
-}
-
-function show_inserted_markers(){
-	n_markers = inserted_markers.length
-	for(i = 0; i < n_markers; ++i){
-		map.addLayer(inserted_markers[i])
-	}
-}
-
-function hide_inserted_markers(){
-	n_markers = inserted_markers.length
-	for(i = 0; i < n_markers; ++i){
-		map.removeLayer(inserted_markers[i])
-	}
 }
 
 function show_selected_markers(){
@@ -227,7 +213,7 @@ function hide_database_markers(){
 
 function calculate_distance(){
 
-	// TODO: calculate distance for selected points
+	// TODO: calculate distance for selected points list
 
 }
 
