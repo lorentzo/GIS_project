@@ -27,7 +27,7 @@ function initmap(){
 // Custom icon class without iconUrl
 var customIcon = L.Icon.extend({
   options: {
-    shadowUrl: 'leaf-shadow.png',
+    shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
     iconSize: [38, 95],
     shadowSize: [50, 64],
     iconAnchor: [22, 94],

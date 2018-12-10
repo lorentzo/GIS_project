@@ -5,6 +5,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    {% load static %}
+
     <title>Title</title>
 
     <!-- Include leaflet CSS in the head section of document -->
@@ -22,14 +25,36 @@
 	<script type="text/javascript" src="{% static 'code.js' %}"></script>
 </head>
 <body>
-    <div id="map"></div>
+<script type="text/javascript" src="{% static 'code.js' %}"></script>
 
-    <div>
-	    <textarea id="inserted_points_box" name="inserted_points" placeholder="No inserted points."></textarea>
-    </div>
+    <div id="wrapper">
 
-    <button onclick="show_markers()">Display markers</button>
-    <button onclick="hide_markers()">Hide markers</button>
+		<div id="map"></div>
+
+	    <div id="inserted_points_text_area">
+		    <textarea rows="4" cols="97" id="selected_points_box" placeholder=" No selected points."></textarea>
+	    </div>
+
+	    <div id="inserted_markers_buttons">
+		    <button onclick="show_inserted_markers()">Display inserted markers</button>
+		    <button onclick="hide_inserted_markers()">Hide inserted markers</button>
+		</div>
+
+		<div id="selected_markers_buttons">
+		    <button onclick="show_selected_markers()">Show selected markers</button>
+		    <button onclick="hide_selected_markers()">Hide selected markers</button>
+		</div>
+
+		<div id="database_markers_buttons">
+		    <button onclick="show_database_markers()">Show database markers</button>
+		    <button onclick="hide_database_markers()">Hide database markers</button>
+		</div>
+
+		<div id="calculate_distance_button">
+			<button onclick="calculate_distance()">Calculate distance</button>
+		</div>
+
+	</div>
 
 	<!-- call script -->
 	<script type="text/javascript">
@@ -39,13 +64,17 @@
 		// initialize map
 		initmap();
 
+		// points from database
+		var database_markers = [];
+
 		// points to be inserted
-		var inserted_points = [];
 		var inserted_markers = [];
 
-		// add mouse listener
-		map.on('click', onMapClick);
+		// selected points
+		var selected_markers = [];
 
+		// read points from DB
+		<!--read_markers_from_database();-->
 
 	</script>
 
