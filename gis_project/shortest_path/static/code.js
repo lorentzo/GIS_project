@@ -211,18 +211,43 @@ function hide_database_markers(){
 	}
 }
 
-function calculate_distance(){
+function calculate_distance() {
+
+    data = [[45.826287, 15.918159], [45.830354, 15.974808], [45.798289, 16.009827], [45.789193, 16.025105]];
+    received_points = []
+
+    $.ajax({
+       type: 'GET',
+       url: 'http://localhost:8000/paths/shortest_for_points',
+       data: {'point_list': JSON.stringify(data)},
+       dataType: 'json',
+       success: function(data){
+            $.each(data, function(index, value) {
+                if(value['fields']) {
+                    _lat = value['fields']['coordinate_x'];
+                    _lng = value['fields']['coordinate_y'];
+
+                    received_points.push([_lat, _lng]);
+                }
+            });
+
+            draw_line(received_points);
+       },
+       error: function(error) {
+           console.log(error);
+       }
+   });
 
 	// DUMMY: pretpostavljam da sam dobio listu tocaka najkraceg puta.
   // TODO: izracunati najkraci put pomocu oznacenih tocaka i vratiti ga kao listu tocaka.
 
-  // PRIMJER: kako izgledaju dva najkraca puta:
-  var shortest_path_1 = [[45.826287, 15.918159], [45.830354, 15.974808], [45.798289, 16.009827], [45.789193, 16.025105]];
-  var shortest_path_2 = [[45.801281, 15.935326], [45.79817, 15.964165], [45.795537, 15.996094], [45.799366, 16.005707]];
+//   PRIMJER: kako izgledaju dva najkraca puta:
+//  var shortest_path_1 = [[45.826287, 15.918159], [45.830354, 15.974808], [45.798289, 16.009827], [45.789193, 16.025105]];
+//  var shortest_path_2 = [[45.801281, 15.935326], [45.79817, 15.964165], [45.795537, 15.996094], [45.799366, 16.005707]];
 
   // iscrtavam prvi path
-  draw_line(shortest_path_1);
-  draw_line(shortest_path_2);
+//  draw_line(shortest_path_1);
+//  draw_line(shortest_path_2);
 }
 
 function draw_line(point_list){

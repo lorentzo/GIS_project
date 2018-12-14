@@ -58,3 +58,19 @@ def points(request):
         return render(request, 'index.html', {'form': form, 'points': points})
 
     return HttpResponse(status=403)
+
+
+def calculate_shortest_path(request):
+    if request.method == 'GET':
+        data = request.GET.get('point_list', None)
+        point_list = Point.json2list(data)
+
+        dummy_points_json = serializers.serialize('json', point_list)
+        points_json_object = json.loads(dummy_points_json)
+        points_json_object.append({'success': True})
+
+        json_response = json.dumps(points_json_object)
+
+        return HttpResponse(json_response, content_type="application/json")
+
+    return HttpResponse(status=403)
