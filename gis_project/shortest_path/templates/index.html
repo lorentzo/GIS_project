@@ -47,6 +47,8 @@
 
 		<div id="calculate_distance_button">
 			<button onclick="calculate_distance()">Calculate distance</button>
+			<button onclick="remove_polylines()">Hide shorest paths</button>
+			<button onclick="show_polylines()">Show shorest paths</button>
 		</div>
 
 	</div>
@@ -64,6 +66,9 @@
 
 		// selected points
 		var selected_markers = [];
+
+		// drawn polylines
+		var polylines = [];
 
 		// read points from DB
 		<!--read_markers_from_database();-->

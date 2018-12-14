@@ -213,9 +213,59 @@ function hide_database_markers(){
 
 function calculate_distance(){
 
-	// TODO: calculate distance for selected points list
+	// DUMMY: pretpostavljam da sam dobio listu tocaka najkraceg puta.
+  // TODO: izracunati najkraci put pomocu oznacenih tocaka i vratiti ga kao listu tocaka.
+
+  // PRIMJER: kako izgledaju dva najkraca puta:
+  var shortest_path_1 = [[45.826287, 15.918159], [45.830354, 15.974808], [45.798289, 16.009827], [45.789193, 16.025105]];
+  var shortest_path_2 = [[45.801281, 15.935326], [45.79817, 15.964165], [45.795537, 15.996094], [45.799366, 16.005707]];
+
+  // iscrtavam prvi path
+  draw_line(shortest_path_1);
+  draw_line(shortest_path_2);
+}
+
+function draw_line(point_list){
+
+  var n_points = point_list.length;
+  var points_for_polyline = [];
+  for(i = 0; i < n_points; ++i){
+    point_i = point_list[i];
+    points_for_polyline.push(point_i);
+  }
+
+  polyline = new L.Polyline(points_for_polyline, {
+    color: 'red',
+    weight: 3,
+    opacity: 0.5,
+    smoothFactor: 1
+  });
+
+  //save polyline to list
+  polylines.push(polyline);
+
+  polyline.addTo(map);
 
 }
+
+function remove_polylines(){
+
+  var n_polylines = polylines.length;
+  for(i = 0; i < n_polylines; ++i){
+    map.removeLayer(polylines[i]);
+  }
+  
+}
+
+function show_polylines(){
+
+  var n_polylines = polylines.length;
+  for(i = 0; i < n_polylines; ++i){
+    polylines[i].addTo(map);
+  }
+  
+}
+
 
 function getCookie(c_name)
 {
