@@ -1,3 +1,5 @@
+selected_points = []
+
 
 // map initialization
 function initmap(){
@@ -75,8 +77,12 @@ function onMarkerClick(event){
 	var marker_latlng = [];
 	var marker_len = selected_markers.length;
 
+	selected_points = []
+
 	for(i = 0; i < marker_len; ++i){
 		marker_latlng.push(selected_markers[i].getLatLng().toString());
+
+		selected_points.push([selected_markers[i].getLatLng().lat, selected_markers[i].getLatLng().lng]);
 	}
 	document.getElementById('selected_points_box').value = marker_latlng;
 
@@ -126,7 +132,6 @@ function populateMap() {
        url: 'http://localhost:8000/points/list',
        success: function(data){
             $.each(data, function(index, value) {
-                console.log(value)
                 if(value['fields']) {
                     _lat = value['fields']['coordinate_x']
                     _lng = value['fields']['coordinate_y']
@@ -213,25 +218,42 @@ function hide_database_markers(){
 
 function calculate_distance() {
 
-    data = [[45.826287, 15.918159], [45.830354, 15.974808], [45.798289, 16.009827], [45.789193, 16.025105]];
-    received_points = []
+    received_points = [];
 
     $.ajax({
        type: 'GET',
        url: 'http://localhost:8000/paths/shortest_for_points',
-       data: {'point_list': JSON.stringify(data)},
+       data: {'point_list': JSON.stringify(selected_points) },
        dataType: 'json',
        success: function(data){
-            $.each(data, function(index, value) {
-                if(value['fields']) {
-                    _lat = value['fields']['coordinate_x'];
-                    _lng = value['fields']['coordinate_y'];
 
-                    received_points.push([_lat, _lng]);
-                }
-            });
+            var returnedData = JSON.parse(data.response_data);
 
-            draw_line(received_points);
+            console.log(returnedData);
+
+            // TODO : ovdje su tocke polylajna pa ih nacrtaj na karti
+
+//            for(var i = 0; i < data.response_data.length; i++) {
+//                _lat = data.response_data[i][0]
+//                _lng = data.response_data[i][1]
+//
+//                console.log(_lat, _lng);
+//
+//                received_points.push([_lat, _lng]);
+//            }
+//
+////            for point in data.received_data
+////            $.each(data.received_data, function(index, value) {
+////            console.log(data);
+////                if(value['fields']) {
+////                    _lat = value['fields']['coordinate_x'];
+////                    _lng = value['fields']['coordinate_y'];
+////
+////                    received_points.push([_lat, _lng]);
+////                }
+////            });
+//
+//            draw_line(received_points);
        },
        error: function(error) {
            console.log(error);
@@ -258,6 +280,8 @@ function draw_line(point_list){
     point_i = point_list[i];
     points_for_polyline.push(point_i);
   }
+
+  console.log(points_for_polyline);
 
   polyline = new L.Polyline(points_for_polyline, {
     color: 'red',

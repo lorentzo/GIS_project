@@ -64,15 +64,29 @@ def points(request):
 
 def calculate_shortest_path(request):
     if request.method == 'GET':
+
         data = request.GET.get('point_list', None)
-        point_list = Point.json2list(data)
 
-        dummy_points_json = serializers.serialize('json', point_list)
-        points_json_object = json.loads(dummy_points_json)
-        points_json_object.append({'success': True})
+        point_list = json.loads(data)
 
-        json_response = json.dumps(points_json_object)
+        start, end = get_endpoints(
+            point_list[0][0],
+            point_list[0][1],
+            point_list[1][0],
+            point_list[1][1]
+        )
 
-        return HttpResponse(json_response, content_type="application/json")
+        path_geometry = get_path_geometry(start, end)
+        path_list = []
+
+        for line in path_geometry:
+            deserialized = json.loads(line)
+            path_list += deserialized['coordinates']
+
+        response_data = json.dumps(path_list)
+
+        data = {'response_data': response_data, 'success': True}
+
+        return JsonResponse(data)
 
     return HttpResponse(status=403)
