@@ -76,7 +76,8 @@ def calculate_shortest_path(request):
             point_list[1][1]
         )
 
-        path_geometry = get_path_geometry(start, end)
+        path_geometry, length = get_path_geometry(start, end)
+        print(length)
         path_list = []
 
         for line in path_geometry:
