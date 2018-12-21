@@ -229,6 +229,8 @@ function calculate_distance() {
 
             var returnedData = JSON.parse(data.response_data);
 
+            draw_line(returnedData);
+
             console.log(returnedData);
 
             // TODO : ovdje su tocke polylajna pa ih nacrtaj na karti
@@ -278,7 +280,8 @@ function draw_line(point_list){
   var points_for_polyline = [];
   for(i = 0; i < n_points; ++i){
     point_i = point_list[i];
-    points_for_polyline.push(point_i);
+
+    points_for_polyline.push([point_i[1], point_i[0]]);
   }
 
   console.log(points_for_polyline);
