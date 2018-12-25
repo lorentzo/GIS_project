@@ -274,30 +274,28 @@ function calculate_distance() {
 //  draw_line(shortest_path_2);
 }
 
-function draw_line(point_list){
+function draw_line(paths_list){
 
-  var n_points = point_list.length;
-  var points_for_polyline = [];
-  for(i = 0; i < n_points; ++i){
-    point_i = point_list[i];
+    console.log(paths_list);
 
-    points_for_polyline.push([point_i[1], point_i[0]]);
+  var n_paths = paths_list.length;
+  for(i = 0; i < n_paths; i++) {
+    var n_points = paths_list[i].length
+    points_for_polyline = [];
+    for(j = 0; j < n_points; j++) {
+        point_i = paths_list[i][j];
+        points_for_polyline.push([point_i[1], point_i[0]]);
+    }
+
+    polyline = new L.Polyline(points_for_polyline, {
+            color: 'red',
+            weight: 3,
+            opacity: 0.5,
+            smoothFactor: 1
+        });
+
+    polyline.addTo(map);
   }
-
-  console.log(points_for_polyline);
-
-  polyline = new L.Polyline(points_for_polyline, {
-    color: 'red',
-    weight: 3,
-    opacity: 0.5,
-    smoothFactor: 1
-  });
-
-  //save polyline to list
-  polylines.push(polyline);
-
-  polyline.addTo(map);
-
 }
 
 function remove_polylines(){

@@ -11,9 +11,15 @@ class Point(models.Model):
 
     @staticmethod
     def json2list(json_list):
-        json_points = json.loads(json_list)
         point_list = []
-
-        for _point in json_points:
-            point_list.append(Point(coordinate_x=float(_point[0]), coordinate_y=float(_point[1])))
+        for json_point in json_list:
+            point_list.append(Point(coordinate_x=float(json_point[0]), coordinate_y=float(json_point[1])))
         return point_list
+
+    def __eq__(self, other):
+        if isinstance(other, Point):
+            return self.coordinate_x == other.coordinate_x and self.coordinate_y == other.coordinate_y
+        return False
+
+    def __hash__(self):
+        return hash((self.coordinate_x, self.coordinate_y))
