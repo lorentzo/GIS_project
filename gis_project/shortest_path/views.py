@@ -110,6 +110,7 @@ def calculate_shortest_path(request):
 
             point_1 = sorted_distance[0][0]
             point_2 = sorted_distance[0][1]
+            distance = sorted_distance[1]
 
             if point_1 not in used_vertices and point_2 not in used_vertices:
                 subset = set()
@@ -121,7 +122,7 @@ def calculate_shortest_path(request):
                 used_vertices.add(point_1)
                 used_vertices.add(point_2)
 
-                mst_path.append((point_1, point_2))
+                mst_path.append((point_1, point_2, distance))
 
             elif point_1 not in used_vertices:
                 subset_1 = None
@@ -145,7 +146,7 @@ def calculate_shortest_path(request):
                     subset_1.add(point_1)
 
                 used_vertices.add(point_1)
-                mst_path.append((point_2, point_1))
+                mst_path.append((point_1, point_2, distance))
 
             elif point_2 not in used_vertices:
                 subset_1 = None
@@ -169,7 +170,7 @@ def calculate_shortest_path(request):
                     subset_1.add(point_2)
 
                 used_vertices.add(point_2)
-                mst_path.append((point_1, point_2))
+                mst_path.append((point_1, point_2, distance))
 
             # if len(mst_path) > len(point_list) - 1:
             #     break
@@ -185,7 +186,7 @@ def calculate_shortest_path(request):
                             subset_2 = subset
 
                     if subset_1 != subset_2:
-                        mst_path.append((point_1, point_2))
+                        mst_path.append((point_1, point_2, distance))
 
             if len(mst_path) >= len(point_list)-1:
                 break
@@ -207,15 +208,12 @@ def calculate_shortest_path(request):
                 deserialized = json.loads(line)
                 path_list += deserialized['coordinates']
 
-            total_path.append(path_list)
+            total_path.append({'path_list': path_list, 'distance': length})
 
         # import pdb
         # pdb.set_trace()
 
         response_data = json.dumps(total_path)
-
-        # import pdb
-        # pdb.set_trace()
 
         data = {'response_data': response_data, 'success': True}
 

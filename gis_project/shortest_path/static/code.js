@@ -280,10 +280,11 @@ function draw_line(paths_list){
 
   var n_paths = paths_list.length;
   for(i = 0; i < n_paths; i++) {
-    var n_points = paths_list[i].length
+    var n_points = paths_list[i].path_list.length;
+    var distance = paths_list[i].distance;
     points_for_polyline = [];
     for(j = 0; j < n_points; j++) {
-        point_i = paths_list[i][j];
+        point_i = paths_list[i].path_list[j];
         points_for_polyline.push([point_i[1], point_i[0]]);
     }
 
