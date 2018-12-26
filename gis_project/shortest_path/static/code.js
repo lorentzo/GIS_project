@@ -276,12 +276,18 @@ function calculate_distance() {
 
 function draw_line(paths_list){
 
-    console.log(paths_list);
+  console.log(paths_list);
+
+  //before drawing hide all previous polylines 
+  remove_polylines();
 
   var n_paths = paths_list.length;
   for(i = 0; i < n_paths; i++) {
     var n_points = paths_list[i].path_list.length;
+    
     var distance = paths_list[i].distance;
+    polylines_dists.push(distance); // remember distances in list
+
     points_for_polyline = [];
     for(j = 0; j < n_points; j++) {
         point_i = paths_list[i].path_list[j];
@@ -296,6 +302,27 @@ function draw_line(paths_list){
         });
 
     polyline.addTo(map);
+
+    // remember polyline in list so it could be removed later
+    polylines.push(polyline);
+
+    
+  }
+
+  // draw table of distances
+  draw_table();
+
+
+}
+
+function draw_table(){
+  var table = document.getElementById("dist_table");
+
+  var n_polylines = polylines.length;
+  for (i = 0; i < n_polylines; ++i){
+    var row = table.insertRow(1);
+    var cell = row.insertCell(0);
+    cell.innerHTML = polylines_dists[i].toString();
   }
 }
 

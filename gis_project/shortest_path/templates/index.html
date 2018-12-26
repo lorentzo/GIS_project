@@ -23,6 +23,17 @@
 
 	<!-- Include javascript file-->
 	<script type="text/javascript" src="{% static 'code.js' %}"></script>
+
+	<style>
+	    table {
+	    	border: 1px dashed red;
+	  	}
+	  	td  {
+	    	border: 1px dashed blue;
+	    	padding: 10px;
+	  	}
+	</style>
+
 </head>
 <body>
 <script type="text/javascript" src="{% static 'code.js' %}"></script>
@@ -49,6 +60,13 @@
 			<button onclick="calculate_distance()">Calculate distance</button>
 			<button onclick="remove_polylines()">Hide shorest paths</button>
 			<button onclick="show_polylines()">Show shorest paths</button>
+
+			<table id="dist_table">
+				<tr>
+    				<td>Distances</td>
+    			</tr>
+			</table>
+
 		</div>
 
 	</div>
@@ -69,6 +87,7 @@
 
 		// drawn polylines
 		var polylines = [];
+		var polylines_dists = [];
 
 		// read points from DB
 		<!--read_markers_from_database();-->
