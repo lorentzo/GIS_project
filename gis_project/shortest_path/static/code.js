@@ -65,27 +65,20 @@ function onMarkerClick(event){
 
 	// if highlighted: remove highlight and remove from list
 	if(selected_markers.includes(this)){
-    var divIcon = L.divIcon({className: 'leaflet-div-icon2'});
+    var divIcon = L.divIcon({html:this.options.title, className: 'leaflet-div-icon2'});
 		this.setIcon(divIcon);
 		var index = selected_markers.indexOf(this);
 		selected_markers.splice(index, 1);
 
     
-    var index = selected_markers.indexOf(curr_label);
-    selected_markers_labels.splice(index, 1);
-    curr_label = curr_label - 1;
-    
 	}
 
 	// else display highlight, and remember in list
 	else{
-    var divIcon = L.divIcon({html: curr_label.toString(), className: 'leaflet-div-icon1'});
+    var divIcon = L.divIcon({html:this.options.title, className: 'leaflet-div-icon1'});
 		this.setIcon(divIcon);
 		selected_markers.push(this);
-    selected_markers_labels.push(curr_label);
 
-    n_labels = selected_markers_labels.length;
-    curr_label = curr_label + 1;
 	}
 
 	// print selected points in textbox
@@ -106,15 +99,18 @@ function onMarkerClick(event){
 // left mouse click listener
 function onMapClick(event){
 
-	// create marker
-  var divIcon = L.divIcon({className: 'leaflet-div-icon2'});
-	var marker = new L.marker(event.latlng, {icon:divIcon});
+  //ask for name
+  var name = prompt("Please enter name of point:", "name");
+  
+  // create marker
+  var divIcon = L.divIcon({html:name, className: 'leaflet-div-icon2'});
+  var marker = new L.marker(event.latlng, {icon:divIcon, title:name});
 
 	// add left click listener for marker
 	marker.on("click", onMarkerClick);
 
 	point_data = {
-	    'name': 'from map',
+	    'name': 'from map', // spremi varijablu "name"
 	    'coordinate_x': event.latlng.lat,
 	    'coordinate_y': event.latlng.lng
 	}
@@ -142,6 +138,8 @@ function onMapClick(event){
 	map.addLayer(marker);
 }
 
+
+
 function populateMap() {
     $.ajax({
        type: 'GET',
@@ -153,8 +151,10 @@ function populateMap() {
                     _lng = value['fields']['coordinate_y']
 
                     var latlng = {lat: _lat, lng: _lng};
-                    var divIcon = L.divIcon({className: 'leaflet-div-icon2'});
-                    var marker = new L.marker(latlng, {icon:divIcon});
+                    // umjesto "name" u html:"name" staviti pravo ime
+                    var divIcon = L.divIcon({html:"name", className: 'leaflet-div-icon2'});
+                    // umjesto "name" u title:"name" staviti pravo ime
+                    var marker = new L.marker(latlng, {icon:divIcon, title:"name"});
                     marker.on("click", onMarkerClick);
                     database_markers.push(marker);
 
@@ -302,7 +302,7 @@ function draw_line(paths_list){
   for(i = 0; i < n_paths; i++) {
     var n_points = paths_list[i].path_list.length;
     
-    var distance = paths_list[i].distance; // vrati udaljenosti po redu: 1-2, 1-3, 1-4,....
+    var distance = paths_list[i].distance; // vrati i imena parova za koje si racunao
     polylines_dists.push(distance); // remember distances in list
 
     points_for_polyline = [];
@@ -339,13 +339,13 @@ function draw_table(){
   var table = document.getElementById("dist_table");
 
   var n_polylines = polylines.length;
-  var n_labels = selected_markers_labels.length;
+
   for (i = 0; i < n_polylines; ++i){
     var row = table.insertRow(1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     cell1.innerHTML = polylines_dists[i].toString();
-    var label = selected_markers_labels[0].toString().concat("-").concat(selected_markers_labels[i+1])
+    var label = "a" // napisao pravo ime parove za koje smo racunali distance
     cell2.innerHTML = label;
   }
 }
