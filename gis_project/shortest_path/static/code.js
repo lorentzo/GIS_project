@@ -19,6 +19,7 @@ function initmap(){
 	//set coordinates for map display
 	map.setView(new L.LatLng(45.815399, 15.966568), 13);
 
+  
 	map.addLayer(osm);
 
 	$.ajaxSetup({
@@ -31,6 +32,7 @@ function initmap(){
 
   populateMap()
 }
+
 
 
 
@@ -238,6 +240,9 @@ function calculate_distance() {
 
     received_points = [];
 
+    $('#loadingmessage').show();  // show the loading message.
+
+
     $.ajax({
        type: 'GET',
        url: 'http://localhost:8000/paths/shortest_for_points',
@@ -245,12 +250,15 @@ function calculate_distance() {
        dataType: 'json',
        success: function(data){
 
-
+            $('#loadingmessage').hide(); // hide the loading message
+            
             var returnedData = JSON.parse(data.response_data);
 
             draw_line(returnedData);
 
             console.log(returnedData);
+
+            
 
             // TODO : ovdje su tocke polylajna pa ih nacrtaj na karti
 
@@ -278,6 +286,7 @@ function calculate_distance() {
        },
        error: function(error) {
            console.log(error);
+           $('#loadingmessage').hide(); // hide the loading message
        }
    });
 

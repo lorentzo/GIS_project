@@ -17,6 +17,12 @@
     left:900px;
 }
 
+#loadingmessage {
+  position: absolute;
+  top:50px;
+  left: 1300px;
+}
+
 #database_markers_buttons {
     position:absolute;
     top: 80px;
@@ -34,6 +40,8 @@
     top:150px;
     left:850px;
 }
+
+
 
 .leaflet-div-icon1
 {
