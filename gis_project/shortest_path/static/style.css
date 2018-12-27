@@ -1,6 +1,6 @@
 #wrapper {
-    width: 1280px;
-    height: 720px;
+    width: 1400px;
+    height: 720;
     border: 1px solid black;
     overflow: auto;
 }

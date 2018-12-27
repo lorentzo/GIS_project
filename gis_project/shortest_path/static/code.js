@@ -28,8 +28,10 @@ function initmap(){
     // add mouse listener
 	map.on('click', onMapClick);
 
-    populateMap()
+
+  populateMap()
 }
+
 
 
 
@@ -242,6 +244,7 @@ function calculate_distance() {
        data: {'point_list': JSON.stringify(selected_points) },
        dataType: 'json',
        success: function(data){
+
 
             var returnedData = JSON.parse(data.response_data);
 
