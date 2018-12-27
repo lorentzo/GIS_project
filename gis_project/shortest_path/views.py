@@ -211,11 +211,13 @@ def calculate_shortest_path(request):
             )
 
             path_geometry, length = get_path_geometry(start, end)
-            path_list = []
+            path_list = [[single_path[0].coordinate_y, single_path[0].coordinate_x]]
 
             for line in path_geometry:
                 deserialized = json.loads(line)
                 path_list += deserialized['coordinates']
+
+            path_list += [[single_path[1].coordinate_y, single_path[1].coordinate_x]]
 
             total_path.append({'path_list': path_list, 'distance': length, 'point_1_name': single_path[0].name, 'point_2_name': single_path[1].name})
 
