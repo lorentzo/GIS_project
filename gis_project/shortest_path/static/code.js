@@ -90,10 +90,9 @@ function onMarkerClick(event){
 	for(i = 0; i < marker_len; ++i){
 		marker_latlng.push(selected_markers[i].getLatLng().toString());
 
-		selected_points.push([selected_markers[i].getLatLng().lat, selected_markers[i].getLatLng().lng]);
+		selected_points.push([selected_markers[i].options.title, selected_markers[i].getLatLng().lat, selected_markers[i].getLatLng().lng]);
 	}
 	document.getElementById('selected_points_box').value = marker_latlng;
-
 }
 
 // left mouse click listener
@@ -110,10 +109,10 @@ function onMapClick(event){
 	marker.on("click", onMarkerClick);
 
 	point_data = {
-	    'name': 'from map', // spremi varijablu "name"
+	    'name': name, // spremi varijablu "name"
 	    'coordinate_x': event.latlng.lat,
 	    'coordinate_y': event.latlng.lng
-	}
+	};
 
     $.ajax({
        type: 'POST',
@@ -147,14 +146,15 @@ function populateMap() {
        success: function(data){
             $.each(data, function(index, value) {
                 if(value['fields']) {
-                    _lat = value['fields']['coordinate_x']
-                    _lng = value['fields']['coordinate_y']
+                    _name = value['fields']['name'];
+                    _lat = value['fields']['coordinate_x'];
+                    _lng = value['fields']['coordinate_y'];
 
                     var latlng = {lat: _lat, lng: _lng};
                     // umjesto "name" u html:"name" staviti pravo ime
-                    var divIcon = L.divIcon({html:"name", className: 'leaflet-div-icon2'});
+                    var divIcon = L.divIcon({html:_name, className: 'leaflet-div-icon2'});
                     // umjesto "name" u title:"name" staviti pravo ime
-                    var marker = new L.marker(latlng, {icon:divIcon, title:"name"});
+                    var marker = new L.marker(latlng, {icon:divIcon, title:_name});
                     marker.on("click", onMarkerClick);
                     database_markers.push(marker);
 
@@ -297,6 +297,7 @@ function draw_line(paths_list){
   //before drawing hide all previous polylines 
   remove_polylines();
   polylines_dists = [];
+  polylines_from_to = [];
 
   var n_paths = paths_list.length;
   for(i = 0; i < n_paths; i++) {
@@ -304,6 +305,7 @@ function draw_line(paths_list){
     
     var distance = paths_list[i].distance; // vrati i imena parova za koje si racunao
     polylines_dists.push(distance); // remember distances in list
+    polylines_from_to.push(paths_list[i].point_1_name + " <---> " + paths_list[i].point_2_name); // remember distances in list
 
     points_for_polyline = [];
     for(j = 0; j < n_points; j++) {
@@ -345,7 +347,7 @@ function draw_table(){
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     cell1.innerHTML = polylines_dists[i].toString();
-    var label = "a" // napisao pravo ime parove za koje smo racunali distance
+    var label = polylines_from_to[i]; // napisao pravo ime parove za koje smo racunali distance
     cell2.innerHTML = label;
   }
 }

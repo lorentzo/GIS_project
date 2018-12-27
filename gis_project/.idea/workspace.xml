@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8cf17266-2fbb-413e-bb8b-51c9b127e9ed" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gis_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/gis_project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shortest_path/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/shortest_path/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shortest_path/static/code.js" beforeDir="false" afterPath="$PROJECT_DIR$/shortest_path/static/code.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shortest_path/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shortest_path/views.py" afterDir="false" />
     </list>
@@ -15,14 +15,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shortest_path/static/code.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="290" selection-start-line="290" selection-end-line="290" />
+            <state relative-caret-position="254">
+              <caret line="307" column="61" selection-start-line="307" selection-start-column="61" selection-end-line="307" selection-end-column="61" />
               <folding>
                 <element signature="e#0#6#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gis_project/local_settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="18" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -39,19 +48,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gis_project/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="627">
-              <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+            <state relative-caret-position="1819">
+              <caret line="107" selection-start-line="107" selection-end-line="107" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/shortest_path/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="700">
+              <caret line="202" selection-start-line="202" selection-end-line="202" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shortest_path/views.py">
+        <entry file="file://$PROJECT_DIR$/shortest_path/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1257">
-              <caret line="198" column="19" selection-start-line="198" selection-start-column="19" selection-end-line="198" selection-end-column="19" />
+            <state relative-caret-position="510">
+              <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -82,6 +103,9 @@
       <find>selected</find>
       <find>selected_points_</find>
       <find>draw_line</find>
+      <find>prompt</find>
+      <find>selected_points</find>
+      <find>polylines_dists</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -101,14 +125,14 @@
         <option value="$PROJECT_DIR$/shortest_path/queries.py" />
         <option value="$PROJECT_DIR$/shortest_path/urls.py" />
         <option value="$PROJECT_DIR$/shortest_path/util.py" />
-        <option value="$PROJECT_DIR$/shortest_path/models.py" />
-        <option value="$PROJECT_DIR$/shortest_path/views.py" />
         <option value="$PROJECT_DIR$/gis_project/settings.py" />
         <option value="$PROJECT_DIR$/shortest_path/static/code.js" />
+        <option value="$PROJECT_DIR$/shortest_path/models.py" />
+        <option value="$PROJECT_DIR$/shortest_path/views.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1680" />
     <option name="height" value="1050" />
   </component>
@@ -199,18 +223,20 @@
       <updated>1544092187302</updated>
       <workItem from="1545768011771" duration="131000" />
       <workItem from="1545777571534" duration="691000" />
-      <workItem from="1545778317202" duration="464000" />
+      <workItem from="1545778317202" duration="668000" />
+      <workItem from="1545869322275" duration="1166000" />
+      <workItem from="1545870668674" duration="3537000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1286000" />
+    <option name="totallyTimeSpent" value="6193000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <frame x="0" y="0" width="1179" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23504274" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23658751" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -221,11 +247,12 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32959184" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -327,30 +354,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gis_project/local_settings.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shortest_path/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="47" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shortest_path/queries.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shortest_path/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -371,13 +378,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shortest_path/views.py">
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1257">
-          <caret line="198" column="19" selection-start-line="198" selection-start-column="19" selection-end-line="198" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="203">
+          <caret line="17269" column="17" selection-start-line="17269" selection-start-column="17" selection-end-line="17269" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -390,17 +394,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gis_project/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+        <state relative-caret-position="1819">
+          <caret line="107" selection-start-line="107" selection-end-line="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gis_project/local_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shortest_path/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="97" column="24" lean-forward="true" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shortest_path/static/code.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="290" selection-start-line="290" selection-end-line="290" />
+        <state relative-caret-position="254">
+          <caret line="307" column="61" selection-start-line="307" selection-start-column="61" selection-end-line="307" selection-end-column="61" />
           <folding>
             <element signature="e#0#6#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shortest_path/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shortest_path/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="202" selection-start-line="202" selection-end-line="202" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>

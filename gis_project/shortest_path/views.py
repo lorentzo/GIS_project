@@ -99,7 +99,7 @@ def calculate_shortest_path(request):
                 _, length = get_path_geometry(start, end)
 
                 distances[(point_1, point_2)] = length
-                distances[(point_2, point_1)] = length
+                # distances[(point_2, point_1)] = length
 
         sorted_distances = sorted(distances.items(), key=operator.itemgetter(1))
         used_vertices = set()
@@ -175,18 +175,27 @@ def calculate_shortest_path(request):
             # if len(mst_path) > len(point_list) - 1:
             #     break
 
-            elif len(mst_path) == len(point_list)-2:
-                    subset_1 = None
-                    subset_2 = None
+            # elif len(mst_path) == len(nd((point_1, point_2, distance))
 
-                    for subset in used_vertices_sets:
-                        if point_1 in subset:
+            else:
+                subset_1 = None
+                subset_2 = None
+
+                for subset in used_vertices_sets:
+                    if point_1 in subset:
+                        if subset_1 is None:
                             subset_1 = subset
-                        if point_2 in subset:
+                    if point_2 in subset:
+                        if subset_2 is None:
                             subset_2 = subset
 
-                    if subset_1 != subset_2:
-                        mst_path.append((point_1, point_2, distance))
+                if subset_1 != subset_2 and subset_1 is not None and subset_2 is not None:
+                    used_vertices_sets.remove(subset_1)
+                    used_vertices_sets.remove(subset_2)
+                    union = subset_1.union(subset_2)
+                    used_vertices_sets.append(union)
+
+                    mst_path.append((point_1, point_2, distance))
 
             if len(mst_path) >= len(point_list)-1:
                 break
@@ -208,10 +217,7 @@ def calculate_shortest_path(request):
                 deserialized = json.loads(line)
                 path_list += deserialized['coordinates']
 
-            total_path.append({'path_list': path_list, 'distance': length})
-
-        # import pdb
-        # pdb.set_trace()
+            total_path.append({'path_list': path_list, 'distance': length, 'point_1_name': single_path[0].name, 'point_2_name': single_path[1].name})
 
         response_data = json.dumps(total_path)
 
