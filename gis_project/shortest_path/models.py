@@ -13,7 +13,10 @@ class Point(models.Model):
     def json2list(json_list):
         point_list = []
         for json_point in json_list:
-            point_list.append(Point(coordinate_x=float(json_point[0]), coordinate_y=float(json_point[1])))
+            point_list.append(Point(
+                name=json_point[0],
+                coordinate_x=float(json_point[1]),
+                coordinate_y=float(json_point[2])))
         return point_list
 
     def __eq__(self, other):
@@ -23,3 +26,6 @@ class Point(models.Model):
 
     def __hash__(self):
         return hash((self.coordinate_x, self.coordinate_y))
+
+    def __str__(self):
+        return self.name

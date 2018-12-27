@@ -1,6 +1,6 @@
 #wrapper {
-    width: 1280px;
-    height: 720px;
+    width: 1400px;
+    height: 720;
     border: 1px solid black;
     overflow: auto;
 }
@@ -17,6 +17,12 @@
     left:900px;
 }
 
+#loadingmessage {
+  position: absolute;
+  top:50px;
+  left: 1300px;
+}
+
 #database_markers_buttons {
     position:absolute;
     top: 80px;
@@ -27,4 +33,35 @@
     position:absolute;
     top: 110px;
     left:850px;
+}
+
+#distance_table {
+    position:absolute;
+    top:150px;
+    left:850px;
+}
+
+
+
+.leaflet-div-icon1
+{
+  background:red;
+  border:5px solid rgba(60,120,200,0.5);
+  color:blue;
+  font-weight:bold;
+  text-align:center;
+  border-radius:100%;
+  line-height:30px;
+}
+
+
+.leaflet-div-icon2
+{
+  background:red;
+  border:5px solid rgba(255,255,255,0.5);
+  color:blue;
+  font-weight:bold;
+  text-align:center;
+  border-radius:50%;
+  line-height:30px;
 }

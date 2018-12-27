@@ -19,6 +19,7 @@ function initmap(){
 	//set coordinates for map display
 	map.setView(new L.LatLng(45.815399, 15.966568), 13);
 
+  
 	map.addLayer(osm);
 
 	$.ajaxSetup({
@@ -28,8 +29,14 @@ function initmap(){
     // add mouse listener
 	map.on('click', onMapClick);
 
-    populateMap()
+
+  populateMap()
 }
+
+
+
+
+
 
 // Custom icon class without iconUrl
 var customIcon = L.Icon.extend({
@@ -62,15 +69,20 @@ function onMarkerClick(event){
 
 	// if highlighted: remove highlight and remove from list
 	if(selected_markers.includes(this)){
-		this.setIcon(getDefaultIcon());
+    var divIcon = L.divIcon({html:this.options.title, className: 'leaflet-div-icon2'});
+		this.setIcon(divIcon);
 		var index = selected_markers.indexOf(this);
 		selected_markers.splice(index, 1);
+
+    
 	}
 
 	// else display highlight, and remember in list
 	else{
-		this.setIcon(getHighlightIcon());
+    var divIcon = L.divIcon({html:this.options.title, className: 'leaflet-div-icon1'});
+		this.setIcon(divIcon);
 		selected_markers.push(this);
+
 	}
 
 	// print selected points in textbox
@@ -82,26 +94,29 @@ function onMarkerClick(event){
 	for(i = 0; i < marker_len; ++i){
 		marker_latlng.push(selected_markers[i].getLatLng().toString());
 
-		selected_points.push([selected_markers[i].getLatLng().lat, selected_markers[i].getLatLng().lng]);
+		selected_points.push([selected_markers[i].options.title, selected_markers[i].getLatLng().lat, selected_markers[i].getLatLng().lng]);
 	}
 	document.getElementById('selected_points_box').value = marker_latlng;
-
 }
 
 // left mouse click listener
 function onMapClick(event){
 
-	// create marker
-	var marker = new L.marker(event.latlng, {icon:getDefaultIcon()});
+  //ask for name
+  var name = prompt("Please enter name of point:", "name");
+  
+  // create marker
+  var divIcon = L.divIcon({html:name, className: 'leaflet-div-icon2'});
+  var marker = new L.marker(event.latlng, {icon:divIcon, title:name});
 
 	// add left click listener for marker
 	marker.on("click", onMarkerClick);
 
 	point_data = {
-	    'name': 'from map',
+	    'name': name, // spremi varijablu "name"
 	    'coordinate_x': event.latlng.lat,
 	    'coordinate_y': event.latlng.lng
-	}
+	};
 
     $.ajax({
        type: 'POST',
@@ -126,6 +141,8 @@ function onMapClick(event){
 	map.addLayer(marker);
 }
 
+
+
 function populateMap() {
     $.ajax({
        type: 'GET',
@@ -133,12 +150,15 @@ function populateMap() {
        success: function(data){
             $.each(data, function(index, value) {
                 if(value['fields']) {
-                    _lat = value['fields']['coordinate_x']
-                    _lng = value['fields']['coordinate_y']
+                    _name = value['fields']['name'];
+                    _lat = value['fields']['coordinate_x'];
+                    _lng = value['fields']['coordinate_y'];
 
                     var latlng = {lat: _lat, lng: _lng};
-
-                    var marker = new L.marker(latlng, {icon:getDefaultIcon()});
+                    // umjesto "name" u html:"name" staviti pravo ime
+                    var divIcon = L.divIcon({html:_name, className: 'leaflet-div-icon2'});
+                    // umjesto "name" u title:"name" staviti pravo ime
+                    var marker = new L.marker(latlng, {icon:divIcon, title:_name});
                     marker.on("click", onMarkerClick);
                     database_markers.push(marker);
 
@@ -220,6 +240,9 @@ function calculate_distance() {
 
     received_points = [];
 
+    $('#loadingmessage').show();  // show the loading message.
+
+
     $.ajax({
        type: 'GET',
        url: 'http://localhost:8000/paths/shortest_for_points',
@@ -227,11 +250,15 @@ function calculate_distance() {
        dataType: 'json',
        success: function(data){
 
+            $('#loadingmessage').hide(); // hide the loading message
+            
             var returnedData = JSON.parse(data.response_data);
 
             draw_line(returnedData);
 
             console.log(returnedData);
+
+            
 
             // TODO : ovdje su tocke polylajna pa ih nacrtaj na karti
 
@@ -259,6 +286,7 @@ function calculate_distance() {
        },
        error: function(error) {
            console.log(error);
+           $('#loadingmessage').hide(); // hide the loading message
        }
    });
 
@@ -276,12 +304,21 @@ function calculate_distance() {
 
 function draw_line(paths_list){
 
-    console.log(paths_list);
+  console.log(paths_list);
+
+  //before drawing hide all previous polylines 
+  remove_polylines();
+  polylines_dists = [];
+  polylines_from_to = [];
 
   var n_paths = paths_list.length;
   for(i = 0; i < n_paths; i++) {
     var n_points = paths_list[i].path_list.length;
-    var distance = paths_list[i].distance;
+    
+    var distance = paths_list[i].distance; // vrati i imena parova za koje si racunao
+    polylines_dists.push(distance); // remember distances in list
+    polylines_from_to.push(paths_list[i].point_1_name + " <---> " + paths_list[i].point_2_name); // remember distances in list
+
     points_for_polyline = [];
     for(j = 0; j < n_points; j++) {
         point_i = paths_list[i].path_list[j];
@@ -296,6 +333,42 @@ function draw_line(paths_list){
         });
 
     polyline.addTo(map);
+
+    // remember polyline in list so it could be removed later
+    polylines.push(polyline);
+
+    
+  }
+
+  // empty old table
+  empty_table();
+
+  // draw table of distances
+  draw_table();
+
+
+}
+
+function draw_table(){
+  var table = document.getElementById("dist_table");
+
+  var n_polylines = polylines.length;
+
+  for (i = 0; i < n_polylines; ++i){
+    var row = table.insertRow(1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = polylines_dists[i].toString();
+    var label = polylines_from_to[i]; // napisao pravo ime parove za koje smo racunali distance
+    cell2.innerHTML = label;
+  }
+}
+
+function empty_table(){
+  var table = document.getElementById("dist_table");
+  var n_rows = table.rows.length;
+  for (var i = 1; i < n_rows; i++){
+    table.deleteRow(1);
   }
 }
 
