@@ -92,7 +92,10 @@ function onMarkerClick(event){
 	selected_points = []
 
 	for(i = 0; i < marker_len; ++i){
-		marker_latlng.push(selected_markers[i].getLatLng().toString());
+    lat = selected_markers[i].getLatLng().lat.toString();
+    lng = selected_markers[i].getLatLng().lng.toString();
+    var poc = "[";
+		marker_latlng.push(poc.concat(lat).concat(",").concat(lng).concat("]:").concat(selected_markers[i].options.title));
 
 		selected_points.push([selected_markers[i].options.title, selected_markers[i].getLatLng().lat, selected_markers[i].getLatLng().lng]);
 	}
