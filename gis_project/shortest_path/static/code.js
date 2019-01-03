@@ -125,7 +125,7 @@ function onMapClick(event){
        type: 'POST',
        dataType : "json",
        data: point_data,
-       url: 'http://localhost:8000/points/create',
+       url: 'http://167.99.129.57:8080/points/create',
        success: function(res){
                console.log(res);
                },
@@ -149,7 +149,7 @@ function onMapClick(event){
 function populateMap() {
     $.ajax({
        type: 'GET',
-       url: 'http://localhost:8000/points/list',
+       url: 'http://167.99.129.57:8080/points/list',
        success: function(data){
             $.each(data, function(index, value) {
                 if(value['fields']) {
@@ -248,7 +248,7 @@ function calculate_distance() {
 
     $.ajax({
        type: 'GET',
-       url: 'http://localhost:8000/paths/shortest_for_points',
+       url: 'http://167.99.129.57:8080/paths/shortest_for_points',
        data: {'point_list': JSON.stringify(selected_points) },
        dataType: 'json',
        success: function(data){
